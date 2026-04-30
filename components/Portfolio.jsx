@@ -79,7 +79,7 @@ const SKILL_ICONS = {
 // ── Home section component ─────────────────────────────────────
 function HomeSection() {
   // Set to true once you've added your real photo to /public/avatar.jpg
-  const avatarIsSet = HOME.avatar && HOME.avatar !== "avatar.JPG";
+  const avatarIsSet = HOME.avatar && HOME.avatar !== "/avatar.jpg";
 
   return (
     <div className="pf-home">
