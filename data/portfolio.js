@@ -49,12 +49,15 @@ export const HOME = {
   skills: [
     { label: "Python",   icon: "python"  },
     { label: "SQL", icon: "sql"},
+    { label: "Excel",   icon: "excel"  },
     { label: "Power BI", icon: "powerbi" },
     { label: "Tableau", icon: "tableau"},
-    { label: "openAI", icon: "openai"},
+    { label: "OpenAI", icon: "openai"},
+    { label: "Anthropic", icon: "anthropic"},
     { label: "LangChain", icon: "langchain"},
     { label: "Pinecone", icon: "pinecone"},
     { label: "GCP", icon: "gcp"},
+    { label: "make.com", icon: "make"},
     
   ],
 };
@@ -138,12 +141,12 @@ export const SECTIONS = {
     cta: { label: "Get In Touch →", target: "home" },
     projects: [
       {
-        title: "Project One",
-        short: "Sales dashboard for a retail client.",
-        industry: "Retail",
-        image: null,            // set to "/projects/project1.jpg" once you have an image
-        tags: ["Python", "Power BI"],
-        description: `A full description of what this project does.\n\nYou can use multiple paragraphs here, explain the problem, your approach, and the outcome.\n\nThis text shows inside the modal when someone clicks the card.`,
+        title: "Automated News Discovery for Digital PR",
+        short: "Identifies real-time news opportunities for PR campaigns using AI",
+        industry: "Digital PR",
+        image: "/projects/newsjacking-1.png",            // set to "/projects/project1.jpg" once you have an image
+        tags: ["Python", "API"],
+        description: `- **Python** script integrated with the **Claude API** to pull and analyze real-time news across selected industries\n- Classified stories as “recent” or “hot” to highlight the most time-sensitive opportunities\n - Generated and sent to the team every morning\n - Reduced manual research by filtering and surfacing high-potential topics, enabling faster and more consistent PR outreach`,
         gallery: [],            // add paths like ["/projects/p1-1.jpg", "/projects/p1-2.jpg"]
       },
       {

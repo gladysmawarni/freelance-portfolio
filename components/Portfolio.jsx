@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { NAV, SECTIONS, SITE, HOME } from "@/data/portfolio";
 import { STYLES } from "@/styles/portfolio.styles";
+import ReactMarkdown from "react-markdown";
 
 
 // ── Nav icons ──────────────────────────────────────────────────
@@ -64,12 +65,15 @@ const LINK_ICONS = {
 const SKILL_ICONS = {
   python:    <img src="/icons/python.svg"    width={18} height={18} alt="Python" />,
   sql:       <img src="/icons/postgresql.svg"       width={18} height={18} alt="SQL" />,
+  excel:     <img src="/icons/excel.svg"       width={18} height={18} alt="Excel" />,
   powerbi:   <img src="/icons/power-bi.svg"   width={18} height={18} alt="Power BI" />,
   tableau:   <img src="/icons/tableau.svg"   width={18} height={18} alt="Tableau" />,
   openai:    <img src="/icons/openai.svg"    width={18} height={18} alt="OpenAI" />,
+  anthropic: <img src="/icons/anthropic.svg"    width={18} height={18} alt="Anthropic" />,
   langchain: <img src="/icons/langchain.svg" width={18} height={18} alt="LangChain" />,
   pinecone:  <img src="/icons/pinecone.svg"  width={18} height={18} alt="Pinecone" />,
   gcp:       <img src="/icons/gcp.svg"       width={18} height={18} alt="GCP" />,
+  make:       <img src="/icons/make.svg"       width={18} height={18} alt="Make.com" />,
 };
 
 // ── Home section component ─────────────────────────────────────
@@ -164,7 +168,9 @@ function ProjectModal({ project, onClose }) {
               {project.tags.map((t) => <span key={t} className="pf-card-tag">{t}</span>)}
             </div>
 
-            <p className="pf-modal-desc">{project.description}</p>
+            <div className="pf-modal-desc">
+              <ReactMarkdown>{project.description}</ReactMarkdown>
+            </div>
 
             {project.gallery?.length > 0 && (
               <>

@@ -277,7 +277,7 @@ export const STYLES = `
   /* ── Project cards ───────────────────── */
   .pf-projects {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 12px;
     margin-bottom: 28px;
   }
@@ -298,11 +298,11 @@ export const STYLES = `
     box-shadow: 3px 3px 0px var(--accent);
     transform: translate(-1px, -1px);
   }
-  /* Header image area */
   .pf-card-img {
     width: 100%;
     aspect-ratio: 16/9;
     object-fit: cover;
+    object-position: top;        /* shows top of image first */
     display: block;
     border-bottom: 1.5px solid var(--border);
     background: var(--accent-dim);
@@ -404,10 +404,12 @@ export const STYLES = `
   /* Header image — only shown if project has one */
   .pf-modal-img {
     width: 100%;
-    aspect-ratio: 16/9;
-    object-fit: cover;
+    max-height: 70vh;            /* gives it room to show fully */
+    object-fit: contain;         /* no cropping, full image visible */
+    object-position: top;
     display: block;
     border-bottom: 2px solid var(--border);
+    background: var(--border-dim);
   }
   .pf-modal-body {
     padding: 24px 28px 28px;
@@ -454,12 +456,64 @@ export const STYLES = `
     gap: 6px;
     margin-bottom: 16px;
   }
+   /* Markdown prose styles scoped to the modal description */
   .pf-modal-desc {
     font-size: 14px;
     line-height: 1.75;
     color: var(--text-secondary);
     white-space: pre-line;
-    margin-bottom: 20px;
+  }
+  .pf-modal-desc p {
+    margin-bottom: 10px;
+  }
+  .pf-modal-desc p:last-child {
+    margin-bottom: 0;
+  }
+  .pf-modal-desc strong, .pf-modal-desc b {
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  .pf-modal-desc em, .pf-modal-desc i {
+    font-style: italic;
+  }
+  .pf-modal-desc h1, .pf-modal-desc h2, .pf-modal-desc h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 16px 0 6px;
+    line-height: 1.2;
+  }
+  .pf-modal-desc h1 { font-size: 18px; }
+  .pf-modal-desc h2 { font-size: 16px; }
+  .pf-modal-desc h3 { font-size: 14px; }
+  .pf-modal-desc ul, .pf-modal-desc ol {
+    padding-left: 18px;
+    margin-bottom: 10px;
+  }
+  .pf-modal-desc ul { list-style: disc; }
+  .pf-modal-desc ol { list-style: decimal; }
+  .pf-modal-desc li {
+    margin-bottom: 4px;
+  }
+  .pf-modal-desc a {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+  .pf-modal-desc code {
+    font-family: monospace;
+    font-size: 12.5px;
+    background: var(--accent-dim);
+    border: 1px solid rgba(204,136,153,0.2);
+    border-radius: 4px;
+    padding: 1px 5px;
+    color: var(--text-primary);
+  }
+  .pf-modal-desc blockquote {
+    border-left: 2px solid var(--accent);
+    padding-left: 12px;
+    color: var(--text-faint);
+    font-style: italic;
+    margin: 10px 0;
   }
   /* Gallery — extra images inside the modal */
   .pf-modal-gallery {
