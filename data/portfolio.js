@@ -150,13 +150,13 @@ export const SECTIONS = {
         gallery: [],            // add paths like ["/projects/p1-1.jpg", "/projects/p1-2.jpg"]
       },
       {
-        title: "Project Two",
-        short: "Automated reporting pipeline.",
-        industry: "Finance",
-        image: null,
-        tags: ["SQL", "Excel"],
-        description: `Detailed description of Project Two.\n\nDescribe the challenge, the tools you used, and the impact it had on the client.`,
-        gallery: [],
+        title: "Data Intelligence Platform for Digital PR Campaigns",
+        short: "AI-powered platform for discovering data-backed Digital PR story opportunities.",
+        industry: "Digital PR",
+        image: "/projects/dpr-idea-1.png",
+        tags: ["Python", "API", "Streamlit"],
+        description: `- A digital PR research platform powered by the **Claude API**, which identifies relevant publicly available datasets, reports, and studies based on a client’s company and industry context\n- Systematically analyzes target industries and retrieves high-quality insights from trusted public data sources and recently published research\n- Generates data-driven story ideas, including suggested headlines, tags, and concise summaries of key findings\n- Delivered as an interactive dashboard using **Streamlit**, enabling users to search by company or topic and instantly surface relevant research insights\n- Significantly reduced manual research effort by automating data discovery, filtering, and synthesis of high-potential PR opportunities\n- Improved DPR workflow efficiency by centralizing research, idea generation, and story tracking in a single platform`,
+        gallery: ['/projects/dpr-idea-2.png'],
       },
       {
         title: "Project Three",
