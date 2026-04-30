@@ -23,7 +23,7 @@ export const NAV = [
 export const HOME = {
   // Path to your avatar image — put it in /public/avatar.jpg
   // and change this to "/avatar.jpg"
-  avatar: "avatar.jpg",
+  avatar: "/avatar.jpg",
   avatarAlt: "profile photo",
 
   // Small italic quote shown under the greeting
