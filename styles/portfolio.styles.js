@@ -123,7 +123,7 @@ export const STYLES = `
   }
 
   .pf-nav-btn {
-    width: 60px;
+    width: 52px;
     height: 52px;
     border-radius: var(--r-nav);
     border: 2px solid transparent;
@@ -149,7 +149,7 @@ export const STYLES = `
     border-color: var(--accent);
   }
   .pf-nav-label {
-    font-size: 7px;
+    font-size: 7.5px;
     font-weight: 500;
     letter-spacing: 0.07em;
     text-transform: uppercase;
@@ -277,7 +277,7 @@ export const STYLES = `
   /* ── Project cards ───────────────────── */
   .pf-projects {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
     gap: 12px;
     margin-bottom: 28px;
   }
@@ -298,11 +298,11 @@ export const STYLES = `
     box-shadow: 3px 3px 0px var(--accent);
     transform: translate(-1px, -1px);
   }
+  /* Header image area */
   .pf-card-img {
     width: 100%;
     aspect-ratio: 16/9;
     object-fit: cover;
-    object-position: top;        /* shows top of image first */
     display: block;
     border-bottom: 1.5px solid var(--border);
     background: var(--accent-dim);
@@ -395,6 +395,7 @@ export const STYLES = `
     width: min(580px, 100%);
     max-height: 88vh;
     overflow-y: auto;
+    overflow-x: hidden;        /* stops sideways scroll */
     animation: slideUp 0.22s cubic-bezier(0.22,1,0.36,1);
     scrollbar-width: thin;
     scrollbar-color: var(--border-dim) transparent;
@@ -404,15 +405,16 @@ export const STYLES = `
   /* Header image — only shown if project has one */
   .pf-modal-img {
     width: 100%;
-    max-height: 70vh;            /* gives it room to show fully */
-    object-fit: contain;         /* no cropping, full image visible */
-    object-position: top;
+    aspect-ratio: 16/9;
+    object-fit: cover;
     display: block;
     border-bottom: 2px solid var(--border);
-    background: var(--border-dim);
   }
   .pf-modal-body {
     padding: 24px 28px 28px;
+    /* ensures children can't overflow sideways */
+    overflow: hidden;
+    word-break: break-word;
   }
   .pf-modal-header {
     display: flex;
@@ -456,7 +458,7 @@ export const STYLES = `
     gap: 6px;
     margin-bottom: 16px;
   }
-   /* Markdown prose styles scoped to the modal description */
+  /* Markdown prose styles scoped to the modal description */
   .pf-modal-desc {
     font-size: 14px;
     line-height: 1.75;
@@ -566,6 +568,37 @@ export const STYLES = `
     border-radius: 8px;
     border: 2px solid var(--border);
     box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+
+  /* ── Role filter banner (Work page) ──── */
+  .pf-role-filter-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px 14px;
+    margin-bottom: 16px;
+    border: 1.5px solid var(--accent);
+    border-radius: var(--r-pill);
+    background: var(--accent-dim);
+    font-size: 11.5px;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .pf-role-filter-clear {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    padding: 2px 6px;
+    border-radius: 4px;
+    transition: background 0.14s ease;
+    white-space: nowrap;
+  }
+  .pf-role-filter-clear:hover {
+    background: rgba(204,136,153,0.2);
   }
 
   /* ── Skill filter bar (Work page) ────── */
@@ -695,24 +728,24 @@ export const STYLES = `
     opacity: 1;
     transform: translateY(0);
   }
-  // .pf-stat:hover {
-  //   border-color: var(--accent);
-  //   box-shadow: 3px 3px 0px var(--accent);
-  // }
+  .pf-stat:hover {
+    border-color: var(--accent);
+    box-shadow: 3px 3px 0px var(--accent);
+  }
   .pf-stat-number {
     font-family: var(--font-display);
-    font-size: 30px;
+    font-size: 26px;
     font-weight: 700;
     color: var(--accent);
     line-height: 1;
     margin-bottom: 4px;
   }
   .pf-stat-label {
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 500;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--text);
+    color: var(--text-faint);
   }
 
   /* ── Timeline (About page) ───────────── */
@@ -776,10 +809,10 @@ export const STYLES = `
     box-shadow: 3px 3px 0px var(--border);
     transition: box-shadow 0.16s ease, border-color 0.16s ease;
   }
-  // .pf-tl-card:hover {
-  //   border-color: var(--accent);
-  //   box-shadow: 3px 3px 0px var(--accent);
-  // }
+  .pf-tl-card:hover {
+    border-color: var(--accent);
+    box-shadow: 3px 3px 0px var(--accent);
+  }
 
   /* ── Featured card (Freelancer) ─────── */
   .pf-tl-card.featured {
@@ -860,14 +893,14 @@ export const STYLES = `
     padding: 12px 14px;
     transition: background 0.16s ease, border-color 0.16s ease;
   }
-  // .pf-tl-role-card:hover {
-  //   background: rgba(204,136,153,0.12);
-  //   border-color: rgba(204,136,153,0.55);
-  // }
+  .pf-tl-role-card:hover {
+    background: rgba(204,136,153,0.12);
+    border-color: rgba(204,136,153,0.55);
+  }
   .pf-tl-role-title {
     font-family: var(--font-display);
     font-style: italic;
-    font-size: 14.5px;
+    font-size: 13.5px;
     font-weight: 700;
     color: var(--text-on-dark);
     margin-bottom: 4px;
@@ -878,10 +911,33 @@ export const STYLES = `
     color: rgba(243,230,216,0.6);
   }
 
+  /* Button inside role card to navigate to filtered work */
+  .pf-tl-role-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+    padding: 5px 12px;
+    border-radius: var(--r-pill);
+    border: 1.5px solid rgba(204,136,153,0.5);
+    background: transparent;
+    color: var(--accent);
+    font-family: var(--font-body);
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: all 0.16s ease;
+  }
+  .pf-tl-role-btn:hover {
+    background: rgba(204,136,153,0.15);
+    border-color: var(--accent);
+  }
+
   .pf-tl-title {
     font-family: var(--font-display);
     font-style: italic;
-    font-size: 19px;
+    font-size: 17px;
     font-weight: 700;
     color: var(--text-primary);
     margin-bottom: 2px;
@@ -955,14 +1011,14 @@ export const STYLES = `
     flex-shrink: 0;
   }
   .pf-home-avatar {
-    width: 145px;
-    height: 190px;
-    border-radius: 20%;
-    object-fit: contain;
+    width: 160px;
+    height: 200px;
+    border-radius: 30%;
+    object-fit: cover;
     border: 2.5px solid var(--border);
     box-shadow: 4px 4px 0px var(--border);
     display: block;
-    // transition: box-shadow 0.16s ease, border-color 0.16s ease;
+    transition: box-shadow 0.16s ease, border-color 0.16s ease;
   }
   // .pf-home-avatar:hover {
   //   border-color: var(--accent);
@@ -1104,12 +1160,20 @@ export const STYLES = `
 
   /* ── Responsive ──────────────────────── */
   @media (max-width: 600px) {
-    .pf-root { padding: 10px; }
+    /* Root takes full viewport, no padding, no visible background */
+    .pf-root {
+      padding: 0;
+      align-items: stretch;
+      justify-content: stretch;
+    }
+    /* Shell fills the entire screen, no border-radius, no offset shadow */
     .pf-shell {
-      border-radius: 14px;
-      box-shadow: 4px 4px 0px var(--border);
-      /* let the shell be full width minus padding */
-      width: 100%;
+      width: 100vw;
+      height: 100dvh;           /* dvh accounts for mobile browser chrome */
+      border-radius: 0;
+      border: none;
+      box-shadow: none;
+      flex-shrink: 0;
     }
     /* Sidebar: collapse to icon-only strip */
     .pf-sidebar {
@@ -1131,6 +1195,8 @@ export const STYLES = `
     /* Hide text labels on mobile, icons only */
     .pf-nav-label { display: none; }
     .pf-content { padding: 24px 20px 40px; }
+    /* Home: extra top margin so avatar doesn't hug the top */
+    .pf-content.is-home { padding-top: 48px; }
     /* Home grid: single column on mobile */
     .pf-home {
       grid-template-columns: 1fr;
@@ -1146,5 +1212,7 @@ export const STYLES = `
     }
     .pf-home-links { justify-content: center; }
     .pf-home-skills { justify-content: center; }
+    /* Projects: 1 column on mobile */
+    .pf-projects { grid-template-columns: 1fr; }
   }
 `;
