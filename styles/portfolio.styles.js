@@ -1196,9 +1196,7 @@ export const STYLES = `
     .pf-nav-label { display: none; }
     .pf-content { padding: 24px 20px 40px; }
     /* Home: extra top margin so avatar doesn't hug the top */
-    .pf-content.is-home { 
-      padding-top: max(72px, env(safe-area-inset-top) + 48px); 
-    }
+    .pf-content.is-home { padding-top: 72px; }
     /* Home grid: single column on mobile */
     .pf-home {
       grid-template-columns: 1fr;
