@@ -303,6 +303,7 @@ export const STYLES = `
     width: 100%;
     aspect-ratio: 16/9;
     object-fit: cover;
+    object-position: top;
     display: block;
     border-bottom: 1.5px solid var(--border);
     background: var(--accent-dim);
@@ -405,10 +406,13 @@ export const STYLES = `
   /* Header image — only shown if project has one */
   .pf-modal-img {
     width: 100%;
-    aspect-ratio: 16/9;
-    object-fit: cover;
+    max-height: 70vh;
+    object-fit: contain;
+    object-position: top;
     display: block;
     border-bottom: 2px solid var(--border);
+    background: var(--border-dim);
+    cursor: zoom-in;
   }
   .pf-modal-body {
     padding: 24px 28px 28px;

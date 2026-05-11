@@ -154,7 +154,12 @@ function ProjectModal({ project, onClose }) {
         <div className="pf-modal" onClick={(e) => e.stopPropagation()}>
 
           {project.image && (
-            <img src={project.image} alt={project.title} className="pf-modal-img" />
+            <img
+              src={project.image}
+              alt={project.title}
+              className="pf-modal-img"
+              onClick={(e) => { e.stopPropagation(); setLightbox(project.image); }}
+            />
           )}
 
           <div className="pf-modal-body">
