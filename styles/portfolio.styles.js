@@ -149,7 +149,7 @@ export const STYLES = `
     border-color: var(--accent);
   }
   .pf-nav-label {
-    font-size: 7.5px;
+    font-size: 6.5px;
     font-weight: 500;
     letter-spacing: 0.07em;
     text-transform: uppercase;
@@ -277,7 +277,7 @@ export const STYLES = `
   /* ── Project cards ───────────────────── */
   .pf-projects {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 12px;
     margin-bottom: 28px;
   }
@@ -394,7 +394,12 @@ export const STYLES = `
     border-radius: var(--r-shell);
     box-shadow: 7px 7px 0px var(--border);
     width: min(580px, 100%);
-    max-height: 88vh;
+    /* ensure modal fits inside mobile viewport (account for top/bottom padding) */
+    max-height: calc(100vh - 40px);
+    /* prefer the newer small-viewport unit where supported to avoid address-bar cutoff */
+    @supports (height: 100svh) {
+      max-height: calc(100svh - 40px);
+    }
     overflow-y: auto;
     overflow-x: hidden;        /* stops sideways scroll */
     animation: slideUp 0.22s cubic-bezier(0.22,1,0.36,1);
@@ -897,10 +902,10 @@ export const STYLES = `
     padding: 12px 14px;
     transition: background 0.16s ease, border-color 0.16s ease;
   }
-  .pf-tl-role-card:hover {
-    background: rgba(204,136,153,0.12);
-    border-color: rgba(204,136,153,0.55);
-  }
+  // .pf-tl-role-card:hover {
+  //   background: rgba(204,136,153,0.12);
+  //   border-color: rgba(204,136,153,0.55);
+  // }
   .pf-tl-role-title {
     font-family: var(--font-display);
     font-style: italic;
