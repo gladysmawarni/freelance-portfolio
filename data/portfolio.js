@@ -3,6 +3,7 @@
 // ============================================================
 
 import WORK_SECTION from "./work.json";
+import RECOMMENDATIONS from "./recommendations.json";
 
 export const SITE = {
   name: "Gladys",
@@ -62,6 +63,7 @@ export const HOME = {
     { label: "make.com", icon: "make"},
     
   ],
+  recommendations: RECOMMENDATIONS,
 };
 
 // ── About section ─────────────────────────────────────────────
@@ -79,6 +81,8 @@ export const SECTIONS = {
       { number: "5",   label: "Industries" },
       { number: "4",   label: "Years Exp." },
     ],
+  
+  
 
     // Most recent first
     timeline: [

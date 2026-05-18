@@ -80,6 +80,8 @@ const SKILL_ICONS = {
 function HomeSection() {
   // Set to true once you've added your real photo to /public/avatar.jpg
   const avatarIsSet = HOME.avatar && HOME.avatar !== "avatar.jpg";
+  const [recOpen, setRecOpen] = useState(false);
+  const [recSelected, setRecSelected] = useState(null);
 
   return (
     <div className="pf-home">
@@ -121,9 +123,57 @@ function HomeSection() {
             ))}
           </div>
         </div>
+
+        {/* Recommendations section */}
+        {HOME.recommendations?.length > 0 && (
+          <div style={{ marginTop: 18 }}>
+            <div className="pf-home-skills-label">Recommendations / Reviews</div>
+            <div style={{ display: 'flex', gap: 8, marginTop: 8, flexWrap: 'wrap' }}>
+              {HOME.recommendations.map((r) => (
+                <button
+                  key={r.role}
+                  type="button"
+                  className="pf-home-link"
+                  onClick={() => { setRecSelected(r); setRecOpen(true); }}
+                >
+                  {r.role}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+        {recOpen && (
+          <RecommendationModal
+            rec={recSelected}
+            onClose={() => { setRecOpen(false); setRecSelected(null); }}
+          />
+        )}
       </div>
 
     </div>
+  );
+}
+
+// ── Recommendation modal ─────────────────────────────────────
+function RecommendationModal({ rec, onClose }) {
+  if (!rec) return null;
+  return createPortal(
+    <>
+      <div className="pf-modal-overlay" onClick={onClose}>
+        <div className="pf-modal" onClick={(e) => e.stopPropagation()}>
+          <div className="pf-modal-body">
+            <div className="pf-modal-header">
+              <div className="pf-modal-title">{rec.role}</div>
+              <button className="pf-modal-close" onClick={onClose} aria-label="Close">✕</button>
+            </div>
+            <div className="pf-modal-desc">
+              <ReactMarkdown>{rec.letter}</ReactMarkdown>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>,
+    document.body
   );
 }
 
