@@ -393,7 +393,7 @@ export const STYLES = `
     border: 2px solid var(--border);
     border-radius: var(--r-shell);
     box-shadow: 7px 7px 0px var(--border);
-    width: min(580px, 100%);
+    width: min(900px, 100%);
     /* ensure modal fits inside mobile viewport (account for top/bottom padding) */
     max-height: calc(100vh - 40px);
     /* prefer the newer small-viewport unit where supported to avoid address-bar cutoff */

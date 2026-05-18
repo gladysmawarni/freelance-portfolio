@@ -157,6 +157,9 @@ function HomeSection() {
 // ── Recommendation modal ─────────────────────────────────────
 function RecommendationModal({ rec, onClose }) {
   if (!rec) return null;
+  
+  const isPdf = rec.type === "pdf" && rec.pdf;
+  
   return createPortal(
     <>
       <div className="pf-modal-overlay" onClick={onClose}>
@@ -167,7 +170,20 @@ function RecommendationModal({ rec, onClose }) {
               <button className="pf-modal-close" onClick={onClose} aria-label="Close">✕</button>
             </div>
             <div className="pf-modal-desc">
-              <ReactMarkdown>{rec.letter}</ReactMarkdown>
+              {isPdf ? (
+                <iframe
+                  src={rec.pdf}
+                  style={{
+                    width: "100%",
+                    height: "500px",
+                    border: "none",
+                    borderRadius: "4px"
+                  }}
+                  title={`${rec.role} PDF`}
+                />
+              ) : (
+                <ReactMarkdown>{rec.letter}</ReactMarkdown>
+              )}
             </div>
           </div>
         </div>
