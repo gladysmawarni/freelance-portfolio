@@ -126,9 +126,9 @@ function HomeSection() {
 
         {/* Recommendations section */}
         {HOME.recommendations?.length > 0 && (
-          <div style={{ marginTop: 18 }}>
+          <div className="pf-home-recommendations-block">
             <div className="pf-home-skills-label">Recommendations / Reviews</div>
-            <div style={{ display: 'flex', gap: 8, marginTop: 8, flexWrap: 'wrap' }}>
+            <div className="pf-home-recommendations">
               {HOME.recommendations.map((r) => (
                 <button
                   key={r.role}

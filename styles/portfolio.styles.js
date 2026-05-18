@@ -172,8 +172,8 @@ export const STYLES = `
   /* Home: vertically centered with a touch more top breathing room */
   .pf-content.is-home {
     justify-content: center;
-    padding-top: 40px;
-    padding-bottom: 40px;
+    padding-top: 24px;
+    padding-bottom: 32px;
   }
   .pf-content::-webkit-scrollbar { width: 5px; }
   .pf-content::-webkit-scrollbar-track { background: transparent; }
@@ -1111,6 +1111,15 @@ export const STYLES = `
     flex-wrap: wrap;
     gap: 7px;
   }
+  .pf-home-recommendations-block {
+    margin-top: 18px;
+  }
+  .pf-home-recommendations {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+  }
   .pf-home-link {
     display: inline-flex;
     align-items: center;
@@ -1203,9 +1212,9 @@ export const STYLES = `
     }
     /* Hide text labels on mobile, icons only */
     .pf-nav-label { display: none; }
-    .pf-content { padding: 24px 20px 40px; }
+    .pf-content { padding: calc(env(safe-area-inset-top, 0px) + 24px) 20px 40px; }
     /* Home: extra top margin so avatar doesn't hug the top */
-    .pf-content.is-home { padding-top: 72px; }
+    .pf-content.is-home { padding-top: calc(env(safe-area-inset-top, 0px) + 48px); }
     /* Home grid: single column on mobile */
     .pf-home {
       grid-template-columns: 1fr;
@@ -1221,6 +1230,7 @@ export const STYLES = `
     }
     .pf-home-links { justify-content: center; }
     .pf-home-skills { justify-content: center; }
+    .pf-home-recommendations { justify-content: center; }
     /* Projects: 1 column on mobile */
     .pf-projects { grid-template-columns: 1fr; }
   }
