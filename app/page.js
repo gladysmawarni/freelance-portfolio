@@ -2,8 +2,8 @@
 import Portfolio from "@/components/Portfolio";
 
 export const metadata = {
-  title: "Gladli — Designer & Developer",
-  description: "Data Analyst Freelancer",
+  title: "Gladlys — Analytics Engineer",
+  description: "Analytics Engineer -Digital PR Freelancer",
 };
 
 export default function Page() {
