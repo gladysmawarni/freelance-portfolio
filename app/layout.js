@@ -1,4 +1,5 @@
 // app/layout.js
+import { Analytics } from '@vercel/analytics/next';
 import { GOOGLE_FONTS_URL } from "@/styles/portfolio.styles";
 
 export default function RootLayout({ children }) {
@@ -11,6 +12,7 @@ export default function RootLayout({ children }) {
       </head>
       <body style={{ margin: 0, padding: 0, background: "#F1E8C7" }}>
         {children}
+        <Analytics />
       </body>
     </html>
   );
