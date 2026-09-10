@@ -31,6 +31,12 @@ const NAV_ICONS = {
       <path d="M8 21h8M12 17v4" />
     </svg>
   ),
+  articles: (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 20h9"/>
+    <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
+  </svg>
+  ),
 };
 
 // ── Social link icons ──────────────────────────────────────────
@@ -239,8 +245,14 @@ function ProjectModal({ project, onClose }) {
               {project.tags.map((t) => <span key={t} className="pf-card-tag">{t}</span>)}
             </div>
 
-            <div className="pf-modal-desc">
-              <ReactMarkdown>{project.description}</ReactMarkdown>
+           <div
+              className="pf-modal-desc pf-article-content"
+            >
+              <ReactMarkdown>
+                {Array.isArray(project.description)
+                  ? project.description.join("\n\n")
+                  : project.description}
+              </ReactMarkdown>
             </div>
 
             {project.gallery?.length > 0 && (
@@ -301,8 +313,13 @@ function ProjectCard({ project }) {
 }
 
 // ── Work section ───────────────────────────────────────────────
-function WorkSection({ data }) {
+function WorkSection({ data, roleFilter, onClearRoleFilter }) {
   const [activeFilter, setActiveFilter] = useState("All");
+
+  useEffect(() => {
+    if (roleFilter) setActiveFilter(roleFilter);
+    else setActiveFilter("All");
+  }, [roleFilter]);
 
   // Collect all unique skill tags across projects
   const allSkills = ["All", ...Array.from(
@@ -333,6 +350,11 @@ function WorkSection({ data }) {
             {skill}
           </button>
         ))}
+        {roleFilter && (
+          <button className="pf-filter-clear" onClick={() => { setActiveFilter("All"); onClearRoleFilter && onClearRoleFilter(); }}>
+            Clear filter
+          </button>
+        )}
       </div>
 
       <div className="pf-projects">
@@ -473,11 +495,82 @@ function AboutSection({ data }) {
   );
 }
 
+// ------------- Article Section --------------
+function ArticlesSection({ data }) {
+  const [activeFilter, setActiveFilter] = useState("All");
+
+  // all unique tags across articles
+  const allTags = ["All", ...Array.from(new Set(data.items.flatMap((i) => i.tags || [])))];
+
+  const filtered = activeFilter === "All"
+    ? data.items
+    : data.items.filter((it) => it.tags?.includes(activeFilter));
+
+  return (
+    <>
+      <span className="pf-tag">{data.tag}</span>
+      <h1 className="pf-heading">
+        {data.heading} {data.headingEm && <em>{data.headingEm}</em>}
+      </h1>
+      {data.sub && <p className="pf-sub" style={{ marginTop: "10px" }}>{data.sub}</p>}
+      {data.intro && <p className="pf-body" style={{ marginTop: "10px", marginBottom: "18px" }}>{data.intro}</p>}
+
+      <div className="pf-filter-bar">
+        <span className="pf-filter-label">Filter</span>
+        {allTags.map((tag) => (
+          <button
+            key={tag}
+            className={`pf-filter-btn${activeFilter === tag ? " active" : ""}`}
+            onClick={() => setActiveFilter(tag)}
+          >
+            {tag}
+          </button>
+        ))}
+        {activeFilter !== "All" && (
+          <button className="pf-filter-clear" onClick={() => setActiveFilter("All")}>Clear filter</button>
+        )}
+      </div>
+
+      <div className="pf-articles">
+        {filtered.map((item) => (
+          <div
+            key={item.title}
+            className="pf-article-card"
+            onClick={() => item.contentPath ? setSelected(item) : window.open(item.url, "_blank")}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => e.key === "Enter" && setSelected(item)}
+          >
+            {item.image ? (
+              <img src={item.image} alt={item.title} className="pf-card-img" />
+            ) : (
+              <div className="pf-card-img-placeholder">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
+                </svg>
+              </div>
+            )}
+            <div className="pf-card-body">
+              <div className="pf-card-title">{item.title}</div>
+              <div className="pf-card-short">{item.short}</div>
+              <div className="pf-card-tags">
+                {item.tags?.map((t) => <span key={t} className="pf-card-tag">{t}</span>)}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+    </>
+  );
+}
+
 // ── Main component ─────────────────────────────────────────────
 export default function Portfolio() {
   const [active, setActive]       = useState(NAV[0].id);
   const [displayed, setDisplayed] = useState(NAV[0].id);
   const [animating, setAnimating] = useState(false);
+  const [roleFilter, setRoleFilter] = useState(null);
 
   const goTo = (id) => {
     if (id === active || animating) return;
@@ -487,6 +580,11 @@ export default function Portfolio() {
       setActive(id);
       setAnimating(false);
     }, 220);
+  };
+
+  const goToWorkWithFilter = (filter) => {
+    setRoleFilter(filter);
+    goTo("work");
   };
 
   return (
@@ -521,9 +619,11 @@ export default function Portfolio() {
               {displayed === "home" ? (
                 <HomeSection />
               ) : displayed === "about" ? (
-                <AboutSection data={SECTIONS.about} />
+                <AboutSection data={SECTIONS.about} onRoleClick={goToWorkWithFilter} />
               ) : displayed === "work" ? (
-                <WorkSection data={SECTIONS.work} />
+                <WorkSection data={SECTIONS.work} roleFilter={roleFilter} onClearRoleFilter={() => setRoleFilter(null)} />
+              ) : displayed === "articles" ? (
+                <ArticlesSection data={SECTIONS.articles} />
               ) : null}
 
             </div>

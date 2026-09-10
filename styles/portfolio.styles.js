@@ -79,8 +79,8 @@ export const STYLES = `
   /* ── Shell — fixed size, always the same ── */
   .pf-shell {
     display: flex;
-    width: min(980px, 96vw);
-    height: min(640px, 92vh);
+    width: min(1280px, 92vw);
+    height: min(800px, 90vh);
     border-radius: var(--r-shell);
     overflow: hidden;
     border: 2px solid var(--border);
@@ -321,7 +321,7 @@ export const STYLES = `
     opacity: 0.5;
   }
   .pf-card-body {
-    padding: 12px 14px 14px;
+    padding: 16px 14px 12px;
     display: flex;
     flex-direction: column;
     gap: 6px;
@@ -420,10 +420,15 @@ export const STYLES = `
     cursor: zoom-in;
   }
   .pf-modal-body {
-    padding: 24px 28px 28px;
+    padding: 24px 120px 40px;
     /* ensures children can't overflow sideways */
     overflow: hidden;
     word-break: break-word;
+  }
+  @media (max-width: 600px) {
+    .pf-modal-body {
+      padding: 20px 24px 32px;
+    }
   }
   .pf-modal-header {
     display: flex;
@@ -469,13 +474,12 @@ export const STYLES = `
   }
   /* Markdown prose styles scoped to the modal description */
   .pf-modal-desc {
-    font-size: 14px;
-    line-height: 1.75;
+    font-size: 15px;
+    line-height: 1.65;
     color: var(--text-secondary);
-    white-space: pre-line;
   }
   .pf-modal-desc p {
-    margin-bottom: 10px;
+    margin: 0 0 8px;
   }
   .pf-modal-desc p:last-child {
     margin-bottom: 0;
@@ -491,20 +495,25 @@ export const STYLES = `
     font-family: var(--font-display);
     font-weight: 700;
     color: var(--text-primary);
-    margin: 16px 0 6px;
+    margin: 14px 0 4px;
     line-height: 1.2;
   }
-  .pf-modal-desc h1 { font-size: 18px; }
-  .pf-modal-desc h2 { font-size: 16px; }
+  .pf-modal-desc h1:first-child,
+  .pf-modal-desc h2:first-child,
+  .pf-modal-desc h3:first-child {
+    margin-top: 0;
+  }
+  .pf-modal-desc h1 { font-size: 17px; }
+  .pf-modal-desc h2 { font-size: 15px; }
   .pf-modal-desc h3 { font-size: 14px; }
   .pf-modal-desc ul, .pf-modal-desc ol {
-    padding-left: 18px;
-    margin-bottom: 10px;
+    padding-left: 16px;
+    margin: 0 0 8px;
   }
   .pf-modal-desc ul { list-style: disc; }
   .pf-modal-desc ol { list-style: decimal; }
   .pf-modal-desc li {
-    margin-bottom: 4px;
+    margin-bottom: 2px;
   }
   .pf-modal-desc a {
     color: var(--accent);
@@ -648,6 +657,48 @@ export const STYLES = `
     border-color: var(--accent);
     color: var(--bg);
     box-shadow: 2px 2px 0px rgba(204,136,153,0.4);
+  }
+
+  /* Articles should use same grid/card sizing as projects */
+  .pf-articles {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .pf-article-card {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: var(--r-card);
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.16s ease;
+    box-shadow: 3px 3px 0px var(--border);
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+  }
+  .pf-article-card:hover {
+    border-color: var(--accent);
+    box-shadow: 3px 3px 0px var(--accent);
+    transform: translate(-1px, -1px);
+  }
+
+  /* Clear filter button in the skill bar */
+  .pf-filter-clear {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: background 0.14s ease, border-color 0.14s ease;
+  }
+  .pf-filter-clear:hover {
+    background: rgba(204,136,153,0.08);
+    border-color: rgba(204,136,153,0.12);
   }
 
   /* ── Skill chips ─────────────────────── */
@@ -1003,10 +1054,9 @@ export const STYLES = `
   }
 
   /* ── Home section ────────────────────── */
-  /* Two-column layout: photo left, content right, both vertically centered */
   .pf-home {
     display: grid;
-    grid-template-columns: 150px 1fr;
+    grid-template-columns: auto 1fr;
     gap: 36px;
     align-items: center;
     width: 100%;
@@ -1021,24 +1071,21 @@ export const STYLES = `
   }
   .pf-home-avatar {
     width: 160px;
-    height: 200px;
-    border-radius: 30%;
+    height: 210px;
+    border-radius: 20px;
     object-fit: cover;
+    object-position: top;
     border: 2.5px solid var(--border);
     box-shadow: 4px 4px 0px var(--border);
     display: block;
     transition: box-shadow 0.16s ease, border-color 0.16s ease;
   }
-  // .pf-home-avatar:hover {
-  //   border-color: var(--accent);
-  //   box-shadow: 4px 4px 0px var(--accent);
-  // }
 
   /* Placeholder when no real image is set */
   .pf-home-avatar-placeholder {
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
+    width: 160px;
+    height: 210px;
+    border-radius: 20px;
     border: 2.5px solid var(--border);
     box-shadow: 4px 4px 0px var(--border);
     background: var(--accent-dim);
@@ -1055,12 +1102,12 @@ export const STYLES = `
     display: flex;
     flex-direction: column;
     gap: 14px;
+    min-width: 0;            /* prevents overflow in grid */
   }
 
-  /* Same scale as the name — just DM Sans weight vs Playfair italic */
   .pf-home-hello {
     font-family: var(--font-body);
-    font-size: clamp(28px, 3.6vw, 44px);
+    font-size: clamp(22px, 3vw, 38px);
     font-weight: 300;
     letter-spacing: -0.01em;
     color: var(--text-secondary);
@@ -1068,7 +1115,7 @@ export const STYLES = `
   }
   .pf-home-name {
     font-family: var(--font-display);
-    font-size: clamp(28px, 3.6vw, 44px);
+    font-size: clamp(22px, 3vw, 38px);
     font-weight: 700;
     color: var(--text-primary);
     line-height: 1.15;
@@ -1079,12 +1126,35 @@ export const STYLES = `
     color: var(--accent);
   }
   .pf-home-role {
-    font-size: 10.5px;
+    font-size: 12px;
     font-weight: 500;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--text-faint);
     margin-top: 2px;
+  }
+
+  /* ── Mobile: stack vertically ────────── */
+  @media (max-width: 600px) {
+    .pf-home {
+      grid-template-columns: 1fr;
+      justify-items: center;
+      text-align: center;
+      gap: 20px;
+    }
+    .pf-home-avatar,
+    .pf-home-avatar-placeholder {
+      width: 120px;
+      height: 160px;
+    }
+    .pf-home-quote {
+      border-left: none;
+      padding-left: 0;
+      border-top: 2px solid var(--accent);
+      padding-top: 8px;
+    }
+    .pf-home-links { justify-content: center; }
+    .pf-home-skills { justify-content: center; }
   }
 
   /* Quote */
@@ -1100,7 +1170,7 @@ export const STYLES = `
 
   /* Intro */
   .pf-home-intro {
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.72;
     color: var(--text-secondary);
   }
@@ -1129,7 +1199,7 @@ export const STYLES = `
     border: 1.5px solid var(--border);
     background: var(--bg);
     color: var(--text-primary);
-    font-size: 11.5px;
+    font-size: 14px;
     font-weight: 500;
     text-decoration: none;
     transition: all 0.16s ease;
@@ -1145,7 +1215,7 @@ export const STYLES = `
 
   /* Skills */
   .pf-home-skills-label {
-    font-size: 9px;
+    font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -1165,7 +1235,7 @@ export const STYLES = `
     border: 1.5px solid var(--border);
     border-radius: var(--r-chip);
     background: var(--bg);
-    font-size: 11.5px;
+    font-size: 14px;
     font-weight: 500;
     color: var(--text-primary);
     box-shadow: 2px 2px 0px var(--border);
@@ -1233,5 +1303,91 @@ export const STYLES = `
     .pf-home-recommendations { justify-content: center; }
     /* Projects: 1 column on mobile */
     .pf-projects { grid-template-columns: 1fr; }
+  }
+
+  /* ── Articles page ───────────────────── */
+  .pf-articles {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .pf-article-card {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: var(--r-card);
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.16s ease;
+    box-shadow: 3px 3px 0px var(--border);
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+  }
+  .pf-article-card:hover {
+    border-color: var(--accent);
+    box-shadow: 3px 3px 0px var(--accent);
+    transform: translate(-1px, -1px);
+  }
+
+  /* reuse card image/body styles already defined for project cards */
+  .pf-article-card .pf-card-img,
+  .pf-article-card .pf-card-img-placeholder {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+    border-bottom: 1.5px solid var(--border);
+    background: var(--accent-dim);
+  }
+
+  .pf-article-card .pf-card-body {
+    padding: 16px 14px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+  }
+
+  .pf-article-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .pf-article-pub {
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-dim);
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    padding: 2px 8px;
+  }
+  .pf-article-date { font-size: 10.5px; color: var(--text-faint); }
+
+  /* Article HTML content inside modal */
+  .pf-article-content { max-width: 100%; }
+  .pf-article-content img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin: 12px 0;
+    border: 1.5px solid var(--border);
+  }
+  .pf-article-content h1,
+  .pf-article-content h2,
+  .pf-article-content h3 {
+    font-family: var(--font-display);
+    color: var(--text-primary);
+    margin: 20px 0 8px;
+  }
+
+  @media (max-width: 900px) {
+    .pf-articles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 600px) {
+    .pf-articles { grid-template-columns: 1fr; }
   }
 `;

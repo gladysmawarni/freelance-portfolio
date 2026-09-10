@@ -3,6 +3,7 @@
 // ============================================================
 
 import WORK_SECTION from "./work.json";
+import ARTICLE_SECTION from "./articles.json";
 import RECOMMENDATIONS from "./recommendations.json";
 
 export const SITE = {
@@ -15,11 +16,12 @@ export const SITE = {
   },
 };
 
-// ── Navigation — only 3 pages now ────────────────────────────
+// ── Navigation — only 4 pages now ────────────────────────────
 export const NAV = [
-  { id: "home",  label: "Home"       },
-  { id: "about", label: "Experience" },
-  { id: "work",  label: "Work"       },
+  { id: "home",     label: "Home"       },
+  { id: "about",    label: "Experience" },
+  { id: "work",     label: "Code"       },  // renamed
+  { id: "articles", label: "Articles"   },  // new
 ];
 
 // ── Home section ──────────────────────────────────────────────
@@ -139,4 +141,5 @@ export const SECTIONS = {
   },
 
   work: WORK_SECTION,
+  articles: ARTICLE_SECTION,
 };

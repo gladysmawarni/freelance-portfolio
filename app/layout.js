@@ -9,7 +9,9 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href={GOOGLE_FONTS_URL} rel="stylesheet" />
       </head>
-      <body style={{ margin: 0, padding: 0, background: "#F1E8C7" }}>
+      <body 
+        suppressHydrationWarning
+        style={{ margin: 0, padding: 0, background: "#F1E8C7" }}>
         {children}
       </body>
     </html>

@@ -1,10 +1,9 @@
 {
-  "tag": "Portfolio",
+  "tag": "Coding",
   "heading": "Where Data Becomes ",
   "headingEm": "Things.",
   "sub": "Projects & Case Studies",
   "body": "From ETL pipelines to interactive dashboards — each project is a chance to solve something real.",
-  "cta": { "label": "Get In Touch →", "target": "home" },
   "projects": [
     {
       "title": "Automated News Discovery for Digital PR",
@@ -12,7 +11,18 @@
       "industry": "Digital PR",
       "image": "/projects/newsjacking-1.png",
       "tags": ["Python", "API"],
-      "description": "- **Python** script integrated with the **Claude API** to pull and analyze real-time news across selected industries\n- Classified stories as “recent” or “hot” to highlight the most time-sensitive opportunities\n - Generated and sent to the team every morning\n - Reduced manual research by filtering and surfacing high-potential topics, enabling faster and more consistent PR outreach",
+      "description": [
+        "**The Problem**",
+        "The team spent hours manually scanning news every morning to find relevant stories for PR pitches.",
+
+        "**What I Built**",
+        "- Python script integrated with the **Claude API** to pull and analyze real-time news",
+        "- Classified stories as *recent* or *hot* to highlight time-sensitive opportunities",
+        "- Automated daily delivery every morning",
+
+        "**Impact**",
+        "Reduced manual research time by **80%**, enabling faster outreach across **5 industries**."
+      ],
       "gallery": []
     },
     {
