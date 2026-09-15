@@ -941,7 +941,6 @@ export const STYLES = `
     opacity: 0;
   }
   .pf-tl-roles.open {
-    max-height: 600px;
     opacity: 1;
   }
 
@@ -1254,15 +1253,15 @@ export const STYLES = `
       align-items: stretch;
       justify-content: stretch;
     }
-    /* Shell fills the entire screen, no border-radius, no offset shadow */
-    .pf-shell {
-      width: 100vw;
-      height: 100dvh;           /* dvh accounts for mobile browser chrome */
-      border-radius: 0;
-      border: none;
-      box-shadow: none;
-      flex-shrink: 0;
-    }
+      /* Shell fills the entire screen, no border-radius, no offset shadow */
+      .pf-shell {
+        width: 100vw;
+        height: 100dvh;           /* dvh accounts for mobile browser chrome */
+        border-radius: 0;
+        border: none;
+        box-shadow: none;
+        flex-shrink: 0;
+      }
     /* Sidebar: collapse to icon-only strip */
     .pf-sidebar {
       width: 52px;
@@ -1280,6 +1279,11 @@ export const STYLES = `
       height: 40px;
       border-radius: 8px;
     }
+
+    .pf-content.is-home {
+      justify-content: flex-start;
+    }
+
     /* Hide text labels on mobile, icons only */
     .pf-nav-label { display: none; }
     .pf-content { padding: calc(env(safe-area-inset-top, 0px) + 24px) 20px 40px; }

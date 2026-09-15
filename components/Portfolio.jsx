@@ -367,6 +367,7 @@ function WorkSection({ data, roleFilter, onClearRoleFilter }) {
 // ── About section — scroll-reveal timeline ─────────────────────
 function TimelineItem({ entry, index }) {
   const ref = useRef(null);
+  const rolesRef = useRef(null);
   const [visible, setVisible] = useState(false);
   const [rolesOpen, setRolesOpen] = useState(false);
 
@@ -380,6 +381,17 @@ function TimelineItem({ entry, index }) {
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
+
+  // Set max-height to the role list's real content height instead of a fixed guess,
+  // so it never clips on narrower screens where text wraps taller.
+  useEffect(() => {
+    if (!rolesRef.current) return;
+    if (rolesOpen) {
+      rolesRef.current.style.maxHeight = `${rolesRef.current.scrollHeight}px`;
+    } else {
+      rolesRef.current.style.maxHeight = "0px";
+    }
+  }, [rolesOpen]);
 
   const isFeatured = !!entry.featured;
   const hasRoles = entry.roles?.length > 0;
@@ -428,7 +440,7 @@ function TimelineItem({ entry, index }) {
 
         {/* Roles sub-cards */}
         {isFeatured && hasRoles && (
-          <div className={`pf-tl-roles${rolesOpen ? " open" : ""}`}>
+          <div ref={rolesRef} className={`pf-tl-roles${rolesOpen ? " open" : ""}`}>
             {entry.roles.map((role) => (
               <div key={role.title} className="pf-tl-role-card">
                 <div className="pf-tl-role-title">{role.title}</div>
@@ -441,6 +453,7 @@ function TimelineItem({ entry, index }) {
     </div>
   );
 }
+
 
 function StatItem({ stat, index }) {
   const ref = useRef(null);
@@ -572,6 +585,8 @@ export default function Portfolio() {
   const [animating, setAnimating] = useState(false);
   const [roleFilter, setRoleFilter] = useState(null);
 
+  const contentRef = useRef(null);
+
   const goTo = (id) => {
     if (id === active || animating) return;
     setAnimating(true);
@@ -579,6 +594,7 @@ export default function Portfolio() {
       setDisplayed(id);
       setActive(id);
       setAnimating(false);
+      if (contentRef.current) contentRef.current.scrollTop = 0;
     }, 220);
   };
 
@@ -613,7 +629,7 @@ export default function Portfolio() {
           </nav>
 
           {/* ── Content panel ── */}
-          <main className={`pf-content${displayed === "home" ? " is-home" : ""}`}>
+          <main ref={contentRef} className={`pf-content${displayed === "home" ? " is-home" : ""}`}>
             <div className={`pf-inner ${animating ? "out" : "in"}`}>
 
               {displayed === "home" ? (
