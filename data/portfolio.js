@@ -81,7 +81,7 @@ export const SECTIONS = {
       { number: "10+", label: "Clients" },
       { number: "7",   label: "Countries" },
       { number: "5",   label: "Industries" },
-      { number: "4",   label: "Years Exp." },
+      { number: "5",   label: "Years Exp." },
     ],
   
   

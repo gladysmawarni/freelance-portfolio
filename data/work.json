@@ -83,7 +83,7 @@
       "title": "Automated Public Financial Data Pipeline",
       "short": "Automates collection of financial data from major global institutions",
       "industry": "FinTech",
-      "image": "/projects/fintech-1.png",
+      "image": "/projects/fintech-1.jpg",
       "tags": ["Python", "API", "Data Pipeline"],
       "description": [
         "**The Problem**",
@@ -95,7 +95,7 @@
         "- Standardized and consolidated data from multiple sources into a unified format",
         "- Enabled faster analysis and easier access to reliable financial indicators"
       ],
-      "gallery": []
+      "gallery": ["/projects/fintech-2.png"]
     },
     {
       "title": "OpenClaw Discord Bot",
