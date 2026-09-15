@@ -13,15 +13,12 @@
       "tags": ["Python", "API"],
       "description": [
         "**The Problem**",
-        "The team spent hours manually scanning news every morning to find relevant stories for PR pitches.",
+        "PR teams needed a faster way to catch relevant news for pitches. Manually scanning the news every morning for time-sensitive stories was slow and easy to fall behind on.",
 
         "**What I Built**",
         "- Python script integrated with the **Claude API** to pull and analyze real-time news",
         "- Classified stories as *recent* or *hot* to highlight time-sensitive opportunities",
-        "- Automated daily delivery every morning",
-
-        "**Impact**",
-        "Reduced manual research time by **80%**, enabling faster outreach across **5 industries**."
+        "- Automated daily delivery every morning"
       ],
       "gallery": []
     },
@@ -31,7 +28,17 @@
       "industry": "Digital PR",
       "image": "/projects/dpr-idea-1.png",
       "tags": ["Python", "API", "Streamlit"],
-      "description": "- A digital PR research platform powered by the **Claude API**, which identifies relevant publicly available datasets, reports, and studies based on a client’s company and industry context\n- Systematically analyzes target industries and retrieves high-quality insights from trusted public data sources and recently published research\n- Generates data-driven story ideas, including suggested headlines, tags, and concise summaries of key findings\n- Delivered as an interactive dashboard using **Streamlit**, enabling users to search by company or topic and instantly surface relevant research insights\n- Significantly reduced manual research effort by automating data discovery, filtering, and synthesis of high-potential PR opportunities\n- Improved DPR workflow efficiency by centralizing research, idea generation, and story tracking in a single platform",
+      "description": [
+        "**The Problem**",
+        "PR teams needed a faster way to find publicly available datasets, reports, and studies to build data-driven story ideas. Manually researching each client's industry for high-quality, relevant insights was slow and inconsistent.",
+
+        "**What I Built**",
+        "- Digital PR research platform powered by the **Claude API** to identify relevant public datasets, reports, and studies based on a client's company and industry",
+        "- Analyzes target industries and retrieves high-quality insights from trusted public sources and recent research",
+        "- Generates story ideas with suggested headlines, tags, and concise summaries of key findings",
+        "- Delivered as an interactive **Streamlit** dashboard, letting users search by company or topic to instantly surface relevant insights",
+        "- Centralized research, idea generation, and story tracking in one platform, cutting manual research time"
+      ],
       "gallery": ["/projects/dpr-idea-2.png"]
     },
     {
@@ -40,7 +47,16 @@
       "industry": "Startup",
       "image": "/projects/gustave-1.png",
       "tags": ["JS", "Python", "Chatbot", "Pinecone", "Cloud Run", "AI Agent"],
-      "description": "- Scraped restaurant data from review platforms such as Time Out and Condé Nast Traveller, and stored it using **Google Firebase** and **Pinecone**\n- Built a chatbot powered by an AI agent that dynamically queries the database based on user intent to deliver relevant restaurant recommendations\n- Developed and deployed the backend API on **Google Cloud Run**\n- Collaborated with a designer to build the frontend in **Webflow**, and integrated the API with the backend",
+      "description": [
+        "**The Problem**",
+        "Diners struggled to get restaurant recommendations that truly matched their preferences, having to sift through scattered reviews across multiple platforms instead of simply asking and getting a tailored answer.",
+
+        "**What I Built**",
+        "- Scraped restaurant data from review platforms such as Time Out and Condé Nast Traveller, storing it using **Google Firebase** and **Pinecone**",
+        "- Built a chatbot powered by an AI agent that dynamically queries the database based on user intent to deliver relevant recommendations",
+        "- Developed and deployed the backend API on **Google Cloud Run**",
+        "- Collaborated with a designer to build the frontend in **Webflow**, and integrated it with the backend"
+      ],
       "gallery": ["/projects/gustave-2.png"]
     },
     {
@@ -49,7 +65,18 @@
       "industry": "EdTech",
       "image": "/projects/rubber-ducky-1.png",
       "tags": ["Python", "Chatbot", "Streamlit"],
-      "description": "- Built an AI chatbot in **Streamlit** using structured course content and topic data\n- Designed to answer student questions based on the specific materials of an online course\n- Provided contextual explanations to help students better understand concepts they are learning\n- Deployed on **Streamlit Cloud** for easy access\n- Reduced reliance on instructors by offering instant, course-specific support\n- [Link](https://rubber-ducky.streamlit.app/)",
+      "description": [
+        "**The Problem**",
+        "An online course mentor received many of the same questions from students repeatedly, taking up time that could go toward higher-value support.",
+
+        "**What I Built**",
+        "- AI chatbot in **Streamlit** using structured course content and topic data",
+        "- Answers student questions based on the specific materials of the course",
+        "- Provides contextual explanations to help students better understand concepts they're learning",
+        "- Deployed on **Streamlit Cloud** for easy access",
+        "- Reduced reliance on the mentor by offering instant, course-specific support",
+        "- [Link](https://rubber-ducky.streamlit.app/)"
+      ],
       "gallery": []
     },
     {
@@ -58,7 +85,16 @@
       "industry": "FinTech",
       "image": "/projects/fintech-1.png",
       "tags": ["Python", "API", "Data Pipeline"],
-      "description": "- Built a **Python** script to automate retrieval of publicly available financial data\n- Integrated with APIs from organizations such as *International Monetary Fund*, *Eurostat*, *OECD*, and *World Bank*\n- Standardized and consolidated data from multiple sources into a unified format\n- Reduced manual effort in sourcing and updating macroeconomic datasets\n- Enabled faster analysis and easier access to reliable financial indicators",
+      "description": [
+        "**The Problem**",
+        "A fintech company needed reliable macroeconomic data from multiple institutions to power its platform, but sourcing and updating it manually meant repetitive work pulling data from disparate sources in inconsistent formats.",
+
+        "**What I Built**",
+        "- **Python** script to automate retrieval of publicly available financial data",
+        "- Integrated with APIs from organizations such as *International Monetary Fund*, *Eurostat*, *OECD*, and *World Bank*",
+        "- Standardized and consolidated data from multiple sources into a unified format",
+        "- Enabled faster analysis and easier access to reliable financial indicators"
+      ],
       "gallery": []
     },
     {
@@ -67,7 +103,16 @@
       "industry": "Personal",
       "image": "/projects/openclaw-1.png",
       "tags": ["AI Agent"],
-      "description": "- Built an AI agent using **OpenClaw** to track currency exchange trends and market developments - Pulled and analyzed latest news, current market conditions, and future outlook for selected currencies\n- Connected the system to **Discord** to deliver updates in a simple, real-time interface\n- Automated daily message delivery using a cron job at a scheduled time",
+      "description": [
+        "**The Problem**",
+        "I needed real-time visibility into currency price movements to inform trading decisions, but manually checking the internet each time was inefficient and unsustainable.",
+
+        "**What I Built**",
+        "- AI agent using **OpenClaw** that searches currency exchange trends and market developments on request or on a schedule",
+        "- Pulls and analyzes latest news, current market conditions, and future outlook for selected currencies",
+        "- Connected to **Discord** to deliver updates in a simple, real-time interface",
+        "- Automated daily message delivery using a cron job at a scheduled time"
+      ],
       "gallery": []
     }
   ]
