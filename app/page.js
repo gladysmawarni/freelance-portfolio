@@ -3,7 +3,7 @@ import Portfolio from "@/components/Portfolio";
 
 export const metadata = {
   title: "Gladys — Analytics Engineer",
-  description: "Analytics Engineer-Digital PR Freelancer",
+  description: "Data Analyst |Analytics Engineer",
 };
 
 export default function Page() {

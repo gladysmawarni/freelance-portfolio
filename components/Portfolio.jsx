@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import { NAV, SECTIONS, SITE, HOME } from "@/data/portfolio";
 import { STYLES } from "@/styles/portfolio.styles";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 
 // ── Nav icons ──────────────────────────────────────────────────
@@ -30,13 +31,7 @@ const NAV_ICONS = {
       <rect x="2" y="3" width="20" height="14" rx="2" />
       <path d="M8 21h8M12 17v4" />
     </svg>
-  ),
-  articles: (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12 20h9"/>
-    <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
-  </svg>
-  ),
+  )
 };
 
 // ── Social link icons ──────────────────────────────────────────
@@ -188,7 +183,7 @@ function RecommendationModal({ rec, onClose }) {
                   title={`${rec.role} PDF`}
                 />
               ) : (
-                <ReactMarkdown>{rec.letter}</ReactMarkdown>
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>{rec.letter}</ReactMarkdown>
               )}
             </div>
           </div>
@@ -201,9 +196,24 @@ function RecommendationModal({ rec, onClose }) {
 
 // ── Project modal ──────────────────────────────────────────────
 function ProjectModal({ project, onClose }) {
+  const [content, setContent] = useState("");
   const [lightbox, setLightbox] = useState(null);
 
   useEffect(() => {
+    if (project.contentPath) {
+      fetch(project.contentPath)
+        .then((r) => r.text())
+        .then(setContent)
+        .catch(() => setContent("Could not load project details."));
+    } else {
+      // fallback to inline description if no contentPath
+      setContent(
+        Array.isArray(project.description)
+          ? project.description.join("\n\n")
+          : project.description || ""
+      );
+    }
+
     const handler = (e) => {
       if (e.key === "Escape") {
         if (lightbox) setLightbox(null);
@@ -211,33 +221,22 @@ function ProjectModal({ project, onClose }) {
       }
     };
     window.addEventListener("keydown", handler);
-    // prevent body scroll while modal is open
     document.body.style.overflow = "hidden";
     return () => {
       window.removeEventListener("keydown", handler);
       document.body.style.overflow = "";
     };
-  }, [onClose, lightbox]);
+  }, [project, onClose, lightbox]);
 
-  // Portal renders directly on document.body — escapes overflow:hidden on shell
   return createPortal(
     <>
       <div className="pf-modal-overlay" onClick={onClose}>
         <div className="pf-modal" onClick={(e) => e.stopPropagation()}>
 
-          {project.image && (
-            <img
-              src={project.image}
-              alt={project.title}
-              className="pf-modal-img"
-              onClick={(e) => { e.stopPropagation(); setLightbox(project.image); }}
-            />
-          )}
-
           <div className="pf-modal-body">
             <div className="pf-modal-header">
               <div className="pf-modal-title">{project.title}</div>
-              <button className="pf-modal-close" onClick={onClose} aria-label="Close">✕</button>
+              <button className="pf-modal-close" onClick={onClose}>✕</button>
             </div>
 
             <div className="pf-modal-tags">
@@ -245,13 +244,20 @@ function ProjectModal({ project, onClose }) {
               {project.tags.map((t) => <span key={t} className="pf-card-tag">{t}</span>)}
             </div>
 
-           <div
-              className="pf-modal-desc pf-article-content"
-            >
-              <ReactMarkdown>
-                {Array.isArray(project.description)
-                  ? project.description.join("\n\n")
-                  : project.description}
+            <div className="pf-modal-desc">
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                components={{
+                  img: ({ node, ...props }) => (
+                    <img
+                      {...props}
+                      onClick={() => setLightbox(props.src)}
+                      style={{ cursor: "zoom-in" }}
+                    />
+                  ),
+                }}
+              >
+                {content}
               </ReactMarkdown>
             </div>
 
@@ -508,75 +514,6 @@ function AboutSection({ data }) {
   );
 }
 
-// ------------- Article Section --------------
-function ArticlesSection({ data }) {
-  const [activeFilter, setActiveFilter] = useState("All");
-
-  // all unique tags across articles
-  const allTags = ["All", ...Array.from(new Set(data.items.flatMap((i) => i.tags || [])))];
-
-  const filtered = activeFilter === "All"
-    ? data.items
-    : data.items.filter((it) => it.tags?.includes(activeFilter));
-
-  return (
-    <>
-      <span className="pf-tag">{data.tag}</span>
-      <h1 className="pf-heading">
-        {data.heading} {data.headingEm && <em>{data.headingEm}</em>}
-      </h1>
-      {data.sub && <p className="pf-sub" style={{ marginTop: "10px" }}>{data.sub}</p>}
-      {data.intro && <p className="pf-body" style={{ marginTop: "10px", marginBottom: "18px" }}>{data.intro}</p>}
-
-      <div className="pf-filter-bar">
-        <span className="pf-filter-label">Filter</span>
-        {allTags.map((tag) => (
-          <button
-            key={tag}
-            className={`pf-filter-btn${activeFilter === tag ? " active" : ""}`}
-            onClick={() => setActiveFilter(tag)}
-          >
-            {tag}
-          </button>
-        ))}
-        {activeFilter !== "All" && (
-          <button className="pf-filter-clear" onClick={() => setActiveFilter("All")}>Clear filter</button>
-        )}
-      </div>
-
-      <div className="pf-articles">
-        {filtered.map((item) => (
-          <div
-            key={item.title}
-            className="pf-article-card"
-            onClick={() => item.contentPath ? setSelected(item) : window.open(item.url, "_blank")}
-            role="button"
-            tabIndex={0}
-            onKeyDown={(e) => e.key === "Enter" && setSelected(item)}
-          >
-            {item.image ? (
-              <img src={item.image} alt={item.title} className="pf-card-img" />
-            ) : (
-              <div className="pf-card-img-placeholder">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
-                </svg>
-              </div>
-            )}
-            <div className="pf-card-body">
-              <div className="pf-card-title">{item.title}</div>
-              <div className="pf-card-short">{item.short}</div>
-              <div className="pf-card-tags">
-                {item.tags?.map((t) => <span key={t} className="pf-card-tag">{t}</span>)}
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-
-    </>
-  );
-}
 
 // ── Main component ─────────────────────────────────────────────
 export default function Portfolio() {
@@ -638,8 +575,6 @@ export default function Portfolio() {
                 <AboutSection data={SECTIONS.about} onRoleClick={goToWorkWithFilter} />
               ) : displayed === "work" ? (
                 <WorkSection data={SECTIONS.work} roleFilter={roleFilter} onClearRoleFilter={() => setRoleFilter(null)} />
-              ) : displayed === "articles" ? (
-                <ArticlesSection data={SECTIONS.articles} />
               ) : null}
 
             </div>

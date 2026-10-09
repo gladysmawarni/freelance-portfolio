@@ -495,7 +495,8 @@ export const STYLES = `
     font-family: var(--font-display);
     font-weight: 700;
     color: var(--text-primary);
-    margin: 14px 0 4px;
+    background: #f5f3b9;
+    margin: 40px 0 4px;
     line-height: 1.2;
   }
   .pf-modal-desc h1:first-child,
@@ -503,9 +504,9 @@ export const STYLES = `
   .pf-modal-desc h3:first-child {
     margin-top: 0;
   }
-  .pf-modal-desc h1 { font-size: 17px; }
-  .pf-modal-desc h2 { font-size: 15px; }
-  .pf-modal-desc h3 { font-size: 14px; }
+  .pf-modal-desc h1 { font-size: 22px; }
+  .pf-modal-desc h2 { font-size: 18px; }
+  .pf-modal-desc h3 { font-size: 15px; }
   .pf-modal-desc ul, .pf-modal-desc ol {
     padding-left: 16px;
     margin: 0 0 8px;
@@ -519,14 +520,38 @@ export const STYLES = `
     color: var(--accent);
     text-decoration: underline;
   }
-  .pf-modal-desc code {
-    font-family: monospace;
-    font-size: 12.5px;
+
+  /* Code LINES */
+  .pf-modal-desc :not(pre) > code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.875em;
     background: var(--accent-dim);
-    border: 1px solid rgba(204,136,153,0.2);
+    border: 1px solid rgba(204, 136, 153, 0.2);
     border-radius: 4px;
-    padding: 1px 5px;
+    padding: 1px 6px;
     color: var(--text-primary);
+    white-space: nowrap;
+  }
+
+  /* Code blocks: the architecture diagram */
+  .pf-modal-desc pre {
+    background: var(--accent-dim);
+    border: 1px solid rgba(204, 136, 153, 0.2);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    // overflow-x: auto;
+    line-height: 1.5;
+  }
+
+  .pf-modal-desc pre code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12.5px;
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--text-primary);
+    white-space: pre;
   }
   .pf-modal-desc blockquote {
     border-left: 2px solid var(--accent);
@@ -535,6 +560,103 @@ export const STYLES = `
     font-style: italic;
     margin: 10px 0;
   }
+
+  .pf-modal-desc img {
+    display: block;
+    width: auto;
+    max-width: 90%;
+    max-height: 400px;
+    height: auto;
+    margin: 20px auto;
+    object-fit: contain;
+  }
+
+  /* Github */
+  .pf-modal-desc a[href*="github.com"] {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    color: inherit;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+
+  .pf-modal-desc a[href*="github.com"]::before {
+    content: "";
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    background-color: currentColor;
+
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22'/%3E%3C/svg%3E") center / contain no-repeat;
+
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22'/%3E%3C/svg%3E") center / contain no-repeat;
+  }
+
+  .pf-modal-desc a[href*="github.com"]:hover {
+    border-color: var(--accent);
+  }
+
+
+  /* TABLES */
+  .pf-modal-desc table {
+    display: table;            /* real table, so width: 100% works */
+    width: 100%;
+    table-layout: auto;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 16px 0;
+    font-size: 14px;
+    line-height: 1.5;
+    border: 1px solid rgba(204, 136, 153, 0.2);
+    border-radius: 8px;
+    overflow: hidden;          /* keeps rounded corners clipping the header bg */
+  }
+
+  /* Optional: give the label column a fixed share and let the rest stretch */
+  .pf-modal-desc td:first-child,
+  .pf-modal-desc th:first-child {
+    width: 22%;
+  }
+
+  .pf-modal-desc th,
+  .pf-modal-desc td {
+    padding: 10px 14px;
+    text-align: left;
+    vertical-align: top;
+    color: var(--text-primary);
+    border-bottom: 1px solid rgba(204, 136, 153, 0.12);
+  }
+
+  .pf-modal-desc thead th {
+    background: var(--accent-dim);
+    font-weight: 600;
+    font-size: 12.5px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    border-bottom: 1px solid rgba(204, 136, 153, 0.25);
+  }
+
+  .pf-modal-desc tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .pf-modal-desc tbody tr:hover td {
+    background: rgba(204, 136, 153, 0.05);
+  }
+
+  /* First column acts as a label */
+  .pf-modal-desc td:first-child {
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
   /* Gallery — extra images inside the modal */
   .pf-modal-gallery {
     display: grid;
