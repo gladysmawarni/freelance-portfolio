@@ -35,7 +35,7 @@ export const HOME = {
 
   greeting: "Hello, I'm",
   name: "Gladys.",
-  role: "Freelancer Analytics Engineer",
+  role: "Data Analyst | Analytics Engineer",
 
   // Short intro paragraph
   intro: "I operate across the full spectrum of data and code, from deep technical work to simplifying complex ideas for non-technical audiences. I care about detail, accuracy, and clarity, and aim to make data both reliable and easy to understand.",
